@@ -62,3 +62,4 @@ typings/
 
 #typescript compile file
 dist
+.DS_STORE
