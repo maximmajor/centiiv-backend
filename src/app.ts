@@ -3,11 +3,19 @@ import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-
+import dotenv from 'dotenv'
 import indexRouter from "./routes/index";
-import usersRouter from "./routes/users";
-
+import usersRouter from "./routes/userManagement";
+import connectDB from './config/db';
+dotenv.config()
 const app = express();
+app.use((_, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+connectDB();
 
 // view engine setup
 app.set("views", path.join(__dirname, "..", "views"));
